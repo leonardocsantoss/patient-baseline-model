@@ -30,7 +30,7 @@ hr.fit = glm(hr_value ~ obesity +
                congestive_heart_failure + hypertension + sex:weight + height:co2_value + sbp_value:gl_value +
                admit_age:sbp_value + sex:co2_value + height:weight + rr_value:co2_value + height:sbp_value +
                admit_age:rr_value + height:rr_value + rr_value:sbp_value + weight:rr_value + 
-               sex:sbp_value + rr_value:pt_value + weight:pt_value + weight:co2_value +
+               sex:sbp_value + rr_value:bt_value + weight:bt_value + weight:co2_value +
                sex:admit_age, data=data, family=Gamma(link="inverse"))
 #step(hr.fit)
 summary(hr.fit)

@@ -20,55 +20,55 @@ maiorPvalue = function(fit){
   print(subset(coefficients, Pr...t.. == max(coefficients$Pr...t..)))
 }
 
-### Modelo de regressão da Pressão Arterial Sistólica(sbp_value)
+### Modelo de regressão da Pressão Arterial Sistólica(bt_value)
 
 # Modelo proposto por Silva (2015) usando MLGs
-pt.fit = glm(pt_value ~ sbp_value + deficiency_anemias + paralysis + coagulopathy + fluid_electrolyte +
+bt.fit = glm(bt_value ~ sbp_value + deficiency_anemias + paralysis + coagulopathy + fluid_electrolyte +
                co2_value + last_drug + gl_value + charttime_time + hypertension + valvular_disease + 
                renal_failure + chronic_pulmonary + rheumatoid_arthritis + pulmonary_circulation + 
                rr_value:sbp_value + hr_value:gl_value + weight:sbp_value + height:hr_value + sex:hr_value + 
                sex:weight + sex:gl_value + gl_value:co2_value + height:gl_value + weight:hr_value + 
                admit_age:co2_value + height:sbp_value + admit_age:rr_value, data=data, family=Gamma(link="inverse"))
-summary(pt.fit)
-#maiorPvalue(pt.fit)
+summary(bt.fit)
+#maiorPvalue(bt.fit)
 # R² = 0.755
-cor(pt.fit$fitted.values,pt.fit$y)^2
+cor(bt.fit$fitted.values,bt.fit$y)^2
 
 ### Validation
 ## Checking model assumptions using residuals
-pt.estud = rstudent(pt.fit)
+bt.estud = rstudent(bt.fit)
 
 # Histogram
-hist(pt.estud, main="Histogram studentized residals", breaks="FD", freq=FALSE)
+hist(bt.estud, main="Histogram studentized residals", breaks="FD", freq=FALSE)
 curve(dnorm(x, mean=0, sd=1), col="red", lwd=2, add=TRUE)
 
 # qqplot
-qqPlot(pt.estud, distribution="norm", pch=20, main="QQ-Plot studentized residuals")
+qqPlot(bt.estud, distribution="norm", pch=20, main="QQ-Plot studentized residuals")
 
 # shapiro, p-value = 0.4675 Normal com 95% de certeza
-shapiro.test(pt.estud)
+shapiro.test(bt.estud)
 
 ## Predict
 # Selecionar amostra para testes
-pt.data.test = data.test
-pt.data.test = arrange(pt.data.test, pt_value)
+bt.data.test = data.test
+bt.data.test = arrange(bt.data.test, bt_value)
 
 # Calcular os valores baseado na regressão
-pt.predict = data.frame(fit=predict.glm(pt.fit, pt.data.test, type="response"))
-pt.predict = arrange(pt.predict, fit)
+bt.predict = data.frame(fit=predict.glm(bt.fit, bt.data.test, type="response"))
+bt.predict = arrange(bt.predict, fit)
 
 # Plotar o gráfico
-ggplot(pt.predict, aes(x=as.integer(rownames(pt.predict)), y=fit, colour="predict")) +
+ggplot(bt.predict, aes(x=as.integer(rownames(bt.predict)), y=fit, colour="predict")) +
   geom_line(shape=1) +
-  geom_line(data=pt.data.test, mapping=aes(x=as.integer(rownames(pt.data.test)), y=pt_value, colour="sample")) +
-  labs(title="Predict pt_value", x="", y="pt_value") +
+  geom_line(data=bt.data.test, mapping=aes(x=as.integer(rownames(bt.data.test)), y=bt_value, colour="sample")) +
+  labs(title="Predict bt_value", x="", y="bt_value") +
   scale_colour_manual("Values of", breaks=c("predict", "sample"), values=c("predict"="red", "sample"="black"))
 
 # Verificar normalidade
-shapiro.test(pt.data.test$pt_value)
-shapiro.test(pt.predict$fit)
+shapiro.test(bt.data.test$bt_value)
+shapiro.test(bt.predict$fit)
 
 # p-value = 0.3914, com 95% de confiança eu posso não rejeita a H0. Então os dados são iguais
-t.test(pt.data.test$pt_value, pt.predict$fit, paired=F, var.equal=T, conf.level=0.95)
+t.test(bt.data.test$bt_value, bt.predict$fit, paired=F, var.equal=T, conf.level=0.95)
 
-rm(pt.fit, pt.predict, pt.data.test, pt.estud, maiorPvalue)
+rm(bt.fit, bt.predict, bt.data.test, bt.estud, maiorPvalue)

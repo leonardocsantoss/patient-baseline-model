@@ -23,12 +23,12 @@ maiorPvalue = function(fit){
 ### Modelo de regressão da Pressão Arterial Sistólica(sbp_value)
 
 # Modelo proposto por Silva (2015) usando MLGs
-sbp.fit = glm(sbp_value ~ co2_value + pt_value + renal_failure + congestive_heart_failure + 
+sbp.fit = glm(sbp_value ~ co2_value + bt_value + renal_failure + congestive_heart_failure + 
                 other_neurological + sex + solid_tumor + last_drug + charttime_time + hypothyroidism + 
                 cardiac_arrhythmias + rheumatoid_arthritis + valvular_disease + height + hr_value + 
-                weight:co2_value + sex:pt_value + sex:hr_value + rr_value:gl_value + hr_value:gl_value +
-                hr_value:pt_value + sex:co2_value + height:pt_value + gl_value:co2_value + weight:hr_value +
-                admit_age:weight + height:gl_value + height:hr_value + pt_value:co2_value + height:co2_value +
+                weight:co2_value + sex:bt_value + sex:hr_value + rr_value:gl_value + hr_value:gl_value +
+                hr_value:bt_value + sex:co2_value + height:bt_value + gl_value:co2_value + weight:hr_value +
+                admit_age:weight + height:gl_value + height:hr_value + bt_value:co2_value + height:co2_value +
                 admit_age:co2_value, data=data, family=Gamma(link="inverse"))
 summary(sbp.fit)
 maiorPvalue(sbp.fit)

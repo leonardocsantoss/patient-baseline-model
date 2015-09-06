@@ -20,7 +20,7 @@ summary.full(data$weight)
 summary.full(data$rr_value)
 summary.full(data$hr_value)
 summary.full(data$sbp_value)
-summary.full(data$pt_value)
+summary.full(data$bt_value)
 summary.full(data$gl_value)
 summary.full(data$co2_value)
 
@@ -50,7 +50,7 @@ hist.plot(data, "co2_value", main="CO2")
 hist.plot(data, "rr_value", main="Frequência respiratória")
 hist.plot(data, "hr_value", main="Frequência cardíaca")
 hist.plot(data, "sbp_value", main="Pressão arterial sistólica")
-hist.plot(data, "pt_value", main="Temperatura corporal")
+hist.plot(data, "bt_value", main="Temperatura corporal")
 
 
 # Plot dos dados de testes
@@ -62,4 +62,4 @@ hist.plot(data.test, "co2_value", main="CO2")
 hist.plot(data.test, "rr_value", main="Frequência respiratória")
 hist.plot(data.test, "hr_value", main="Frequência cardíaca")
 hist.plot(data.test, "sbp_value", main="Pressão arterial sistólica")
-hist.plot(data.test, "pt_value", main="Temperatura corporal")
+hist.plot(data.test, "bt_value", main="Temperatura corporal")

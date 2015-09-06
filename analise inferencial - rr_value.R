@@ -25,9 +25,9 @@ rr.fit = glm(rr_value ~ other_neurological + gl_value + chronic_pulmonary + hypo
                rheumatoid_arthritis + last_drug + renal_failure + metastatic_cancer + sex + 
                congestive_heart_failure + fluid_electrolyte + solid_tumor + weight + admit_age + 
                weight_loss + charttime_time + lymphoma + weight:admit_age + sbp_value:admit_age +
-               co2_value:hr_value + weight:co2_value + pt_value:sex + sex:co2_value + height:hr_value +
-               pt_value:admit_age + pt_value:height + height:co2_value + sex:admit_age +
-               pt_value:co2_value, data=data, family=inverse.gaussian(link = "1/mu^2"))
+               co2_value:hr_value + weight:co2_value + bt_value:sex + sex:co2_value + height:hr_value +
+               bt_value:admit_age + bt_value:height + height:co2_value + sex:admit_age +
+               bt_value:co2_value, data=data, family=inverse.gaussian(link = "1/mu^2"))
 #step(rr.fit)
 summary(rr.fit)
 maiorPvalue(rr.fit)
